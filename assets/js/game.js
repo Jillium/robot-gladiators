@@ -4,56 +4,50 @@
 //  * Defeat each enemy-robot
 // "LOSE" - Player robot's health is zero or less
 
+
 var fightOrSkip = function() {
-    //ask player if they'd like to fight or skip using fightOrSkip function 
+    //ask player if they'd like to fight or skip using fightOrSKip function.
     var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
 
-        promptFight = promptFight.toLowerCase();
-
-        if (promptFight === "skip") {
-
-        
-
-    if (!promptFight) {
-        window.alert("You need to provide a valid answer! Please try again.");
+    //Conditional Recursive Function Call
+    if (promptFight === "" || promptFight === null) {
+        window.alert("You  need to provide a valid answer! Please try again.");
         return fightOrSkip();
     }
 
     //if player picks "skip" confirm and then stop the loop
-    if (promptFight === "skip" || promptFight === "SKIP") {
+
+    promptFight = promptFight.toLowerCase();
+
+    if (promptFight === "skip") {
         //confirm player wants to skip
         var confirmSkip = window.confirm("Are you sure you'd like to quit?");
 
         //if yes (true), leave fight
-        if(confirmSkip) {
-            window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
-            // subtract money from playerMoney for skipping 
-            playerInfo.money = Math.max(0, playerInfo.money - 10);
-            shop();
+        if (confirmSkip) {
+            window.alert(playerInfo.name = " has decided to skip this fight. Goodbye!");
+
+            // subtract money from playerMoney for skipping
+            playerInfo.playerMoney = playerInfo.money - 10;
+
             //return true if player wants to leave
             return true;
-
-            
-
-            
         }
     }
-    }
-            return false;
+    return false;
 }
-
 
 
 var fight = function(enemy) {
     // repeat and execute as long as the enemy-robot is alive
     while (playerInfo.health > 0 && enemy.health > 0) {
-        //ask player if they'd like to fight or skip using fightOrSKip function
-        if (fightOrSkip()) {
-            //if true, leave fight by breaking loop
-            break;
-        }
+        // ask player if they'd like to fight or skip using fightORSkip function
+         if (fightOrSkip()) {
+             //if true, leave fight by breaking loop
+             break;
+         } 
         var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
-    }
+    
     
     
 
@@ -71,7 +65,7 @@ var fight = function(enemy) {
           playerInfo.money = playerInfo.money + 20;
 
           //leave while(loop) since enemy is dead
-          
+          break;
       } else {
           window.alert(enemy.name + " still has " + enemy.health + " health left.");
       }
@@ -89,7 +83,7 @@ var fight = function(enemy) {
       if (playerInfo.health <+ 0) {
           window.alert(playerInfo.name + " has died!");
           //leave while() loop if player is dead
-          
+          break;
         } else {
             window.alert(playerInfo.name + " still has " + playerInfo.health + " health left. ");
         }
@@ -97,7 +91,7 @@ var fight = function(enemy) {
        
        
     
-       
+    }
     
    };
    
@@ -240,6 +234,9 @@ var getPlayerName = function() {
 
 var playerInfo = {
     name: getPlayerName(),
+    health: 100,
+    attack: 10,
+    money: 10,
         reset: function() {
         this.health = 100;
         this.money = 10;
@@ -249,7 +246,7 @@ var playerInfo = {
         if (this.money >=7) {
             window.alert("Refilling player's health by 20 for 7 collars.")
         this.health += 20;
-        this.money -+ 7;
+        this.money -= 7;
         }
         else {
             window.alert("You don't have enough money!");
@@ -259,7 +256,7 @@ var playerInfo = {
         if (this.money >= 7) {
             window.alert("Upgrading player's attack by 6 for 7 dollars.");
         this.attack += 6;
-        this.money -+ 7;
+        this.money -= 7;
     }
     else {
         window.alert("You don't have enough money!");
