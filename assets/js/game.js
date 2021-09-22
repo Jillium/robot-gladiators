@@ -4,6 +4,14 @@
 //  * Defeat each enemy-robot
 // "LOSE" - Player robot's health is zero or less
 
+// function to generate a random numberic value
+var randomNumber = function(min, max) {
+    var value = Math.floor(Math.random() * (max - min) + min);
+
+    return value;
+};
+
+
 
 var fightOrSkip = function() {
     //ask player if they'd like to fight or skip using fightOrSKip function.
@@ -25,10 +33,10 @@ var fightOrSkip = function() {
 
         //if yes (true), leave fight
         if (confirmSkip) {
-            window.alert(playerInfo.name = " has decided to skip this fight. Goodbye!");
+            window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
 
             // subtract money from playerMoney for skipping
-            playerInfo.playerMoney = playerInfo.money - 10;
+            playerInfo.money = Math.max(0, playerInfo.money - 10);
 
             //return true if player wants to leave
             return true;
@@ -171,53 +179,30 @@ var endGame = function() {
 var shop = function() {
     //ask player what they'd like to do
     var shopOptionPrompt = window.prompt(
-        "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
+        "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter 1 for REFILL, 2 for UPGRADE, or 3 for LEAVE."
     );
+
+        shopOptionPrompt = parseInt(shopOptionPrompt);
 
     // use switch to carry out action
     switch (shopOptionPrompt) {
-      case "refill":
-      case "REFILL":
+      case 1:
          playerInfo.refillHealth();
          break;
-
-        //increase health and decrease money
-        playerInfo.health = playerInfo.health + 20;
-        playerInfo.money = playerInfo.money - 7;
-          
-          break;
-       case "upgrade":
-       case "UPGRADE":    
+         case 2:   
           playerInfo.upgradeAttack();
           break;
-        
-            //increase attack and decrease money
-        playerInfo.attack = playerInfo.attack + 6;
-        playerInfo.money = playerInfo.money - 7;  
-      case "leave":
-      case "LEAVE":    
+      case 3:  
           window.alert("Leaving the store.");
-
-          //do nothing, so function will end
           break;
       default:
           window.alert("You did not pick a valid option. Try again.");
-
           shop();
           break;
 
 
     }  
     };
-
-
-
-// function to generate a random numberic value
-var randomNumber = function(min, max) {
-    var value = Math.floor(Math.random() * (max - min + 1)) + min;
-
-    return value;
-};
 
 //function to set up name
 var getPlayerName = function() {
